@@ -1,35 +1,32 @@
-import {getData, getCountryByName} from './fetch.js';
+import {getData, getCountryByName, getCountryByCode} from './fetch.js';
 
-let key, country;
-const getFromLocalStorage = () => {
-    if(!localStorage.getItem("country")){
-        localStorage.setItem("country" , "");
-        if(!localStorage.getItem("code")){
-            localStorage.setItem("code" , "")
-            location.assign("404.html");
-        }else{
-            return localStorage.getItem("code");
-        }
-    }else{
-        return localStorage.getItem("country");
-    }
+let keyCode, keyName, country;
+const getKey = (storageKey) => {
+    if(!localStorage.getItem(storageKey)) return null;
+    return localStorage.getItem(storageKey);
 }
 
-key = getFromLocalStorage();
-console.log(key);
+keyCode = getKey("code");
+keyName = getKey("country");
+console.log(keyName);
+console.log(keyCode);
 
-country = await getCountryByName(key);
+if(keyCode !== "" && keyCode !== null) {
+    country = await getCountryByCode(keyCode);
+} else if(keyName !== "" && keyName !== null) {
+    country = await getCountryByName(keyName);
+}
+
+
+
 console.log(country)
 
 const comaSeperate = (object, key) => {
-    let str = "";
+    let array = [];
+    console.log(key)
     if(typeof object[key] == "object")
         object[key] = Object.values(object[key]);
-    for(let i = 0; i < object[key].length; i++){
-        str = object[key][i];
-        if(i < object[key].length-1) str =+ ", ";
-    }
-    return str;
+    return object[key].join(", ")
 }
 
 const displayPage = () => {
@@ -108,6 +105,12 @@ const displayPage = () => {
 
     borders.append(borderLabel);
 
+    const borderContainer = document.createElement("div")
+    borderContainer.classList.add("specifics-borders-container");
+
+    if(!country[0].borders) borderLabel.innerText += "None"
+    else borders.appendChild(borderContainer)
+
     if(country[0].borders){
         for(let i = 0; i < country[0].borders.length; i++){
             const border = document.createElement("div");
@@ -120,9 +123,10 @@ const displayPage = () => {
                 location.reload();
             })
     
-            borders.appendChild(border);
+            borderContainer.appendChild(border);
         }
     }
+
 
     info.append(title, details, borders);
     content.append(flag, info);
