@@ -2,8 +2,9 @@
 
 :root{
   --dark-mode-elements: hsl(209, 23%, 22%);
+  --dark-mode-elements-hover: hsl(208, 24%, 29%);
   --dark-mode-background: hsl(207, 26%, 17%);
-  --dark-mode-text: hsl(0, 0%, 100%);
+  --dark-mode-text: white;
 }
 
 *{
@@ -21,7 +22,7 @@ body{
 
 .nav-bar{
   width: 100%;
-  max-width: 1440px;
+  min-height: 4rem;
   background-color: var(--dark-mode-elements);
 }
 
@@ -29,8 +30,9 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -40,20 +42,23 @@ body{
   font-size: 1.5rem;
 }
 
-.dark-mode{
+.darkmode{
   color: var(--dark-mode-text);
   font-weight: 600;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: start;
   gap: 1rem;
   padding: 1rem;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+  margin-top: 2rem;
 }
 
 .country-container{
@@ -67,6 +72,11 @@ body{
   overflow: hidden;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.country-container:hover{
+  transform: scale(1.03);
 }
 
 .country-flag-container{
@@ -97,7 +107,11 @@ body{
 .specifics{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   gap: 2rem;
+  padding: 2rem;
 }
 
 .specifics-button{
@@ -106,22 +120,27 @@ body{
   font-size: 1rem;
   font-weight: 600;
   border: none;
+  max-width: 120px;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
 }
 
+.specifics-button:hover{
+  background-color: var(--dark-mode-elements-hover);
+}
+
 .specifics-content{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-items: space-between;
-  height: 500px;
+  justify-items: center;
+  gap: 2rem;
+  height: auto;
 }
 
 .specifics-flag{
-  height: 100%;
+  height: 500px;
   object-fit: contain;
-  object-position: center;
 }
 
 .specifics-info{
@@ -129,27 +148,27 @@ body{
   flex-direction: column;
   justify-content: space-around;
   gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
   height: 100%;
 }
 
-.specifics-name{
+.specifics-title{
   font-size: 2rem;
   color: var(--dark-mode-text);
   font-weight: 800;
 }
 
-.specifics-details{
+.specific-details{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   justify-content: space-between;
   gap: 1rem;
   color: var(--dark-mode-text);
   font-weight: 400;
 }
 
-.specifics-detail{
+.specific-detail{
+  display: block;
   font-size: 1rem;
   font-weight: 500;
   color: var(--dark-mode-text);
@@ -158,6 +177,7 @@ body{
 .specifics-borders{
   display: flex;
   justify-content: start;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -173,10 +193,18 @@ body{
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  padding: 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.25rem;
+  padding: 0 1rem;
   border-radius: 3px;
   cursor: pointer;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.101);
+}
+
+.specifics-borders-button:hover{
+  background-color: var(--dark-mode-elements-hover);
 }
 
 
