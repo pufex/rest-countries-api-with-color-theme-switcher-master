@@ -7,12 +7,39 @@ const countries = await getData();
 console.log(countries);
 const container = document.querySelector('.container');
 
-const displayCountry = (country) =>{
-  container.innerHTML = "";
+const btn = document.querySelector(".filter-title");
+
+btn.addEventListener("click", () => {
+  const filters = document.querySelector(".filters");
+  filters.classList.toggle("hidden");
+})
+
+const filterCountries = () => {
+  const radios = document.querySelectorAll('input[name="region"]');
+  let chosenRegion;
+  for(const radio of radios){
+    if(radio.checked){
+      chosenRegion = radio.value;
+      break;
+    }
+  }
   
+  displayCountries(countries.filter(item => item.region === chosenRegion));
 }
 
-const displayCountries = () =>{
+const radios = document.querySelectorAll('input[name="region"]');
+radios.forEach((radio) => {
+  radio.addEventListener("click", () => {
+    filterCountries();
+  })
+})
+
+const searchbar = document.querySelector("#search")
+searchbar.addEventListener("keyup", () => {
+  displayCountries(countries.filter(item => item.name.common.toLowerCase().includes(searchbar.value.toLowerCase())));
+})  
+
+const displayCountries = (countries) =>{
   container.innerHTML = "";
   countries.forEach((country) =>{
     const countryContainer = document.createElement("div");
@@ -48,9 +75,13 @@ const displayCountries = () =>{
 
     countryContainer.addEventListener("click", () =>{
       localStorage.setItem("country", (country.name.common).toLowerCase())
+      // console.log(localStorage.getItem("country"));
       location.assign("specifics.html");
     })
   })
 }
 
-displayCountries();
+localStorage.setItem("country", "")
+localStorage.setItem("code", "")
+
+displayCountries(countries);
