@@ -24,7 +24,8 @@ export const getCountryByName = async (name) =>{
 }
 
 export const getCountryByCode = async (code) =>{
-  const res = await fetch(`https://restcountries.com/v3.1/https://restcountries.com/v3.1/alpha?codes=${code.toLowerCase()}`);
+  console.log(`https://restcountries.com/v3.1/alpha/${code.toLowerCase()}`);
+  const res = await fetch(`https://restcountries.com/v3.1/alpha/${code.toLowerCase()}`);
   if(!res.ok) throw new Error('Failed to fetch data');
   try{
     const data = await res.json();
