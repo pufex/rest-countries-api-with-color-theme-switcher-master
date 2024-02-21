@@ -30,5 +30,6 @@ const switchTheme = () => {
 
 switchTheme();
 darkmode.addEventListener("click", () => {
+    darkmode.classList.toggle("active");
     switchTheme();
 })
